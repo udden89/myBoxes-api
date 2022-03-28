@@ -1,6 +1,7 @@
 package app;
 
 import app.controllers.BoxController;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.javalin.Javalin;
 
 import java.sql.Connection;
@@ -11,13 +12,15 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Application {
 
-    static private final String username = "root";
-    static private final String password = "admin";
-    static private final String database = "myboxes";
-
     public static Connection connection = null;
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+        Dotenv dotenv = Dotenv.load();
+
+        String username = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+        String database = dotenv.get("DB_NAME");
 
         Javalin app = Javalin.create().start(7070);
 
