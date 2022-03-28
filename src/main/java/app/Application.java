@@ -23,7 +23,6 @@ public class Application {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        /*String url = "jdbc:mysql://localhost/?user=" + username + "&password=" + password;*/
         String url = "jdbc:mysql://localhost/" + database;
         connection = DriverManager.getConnection(url, username, password);
 

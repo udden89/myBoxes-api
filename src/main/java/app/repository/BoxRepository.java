@@ -1,11 +1,6 @@
 package app.repository;
 
-/*import static app.db.MySQLStartup.executePreparedStatement;*/
-
 import app.models.BoxModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,16 +8,9 @@ import static app.Application.connection;
 
 public class BoxRepository {
 
-    Logger logger = LoggerFactory.getLogger(BoxRepository.class);
-
      public BoxRepository() {
-         /*createDB();*/
          createBoxTable();
     }
-
-  /*  public void createDB(){
-        executeStatement("CREATE DATABASE IF NOT EXISTS " + database);
-    }*/
 
     public void createBoxTable(){
         String sql = "CREATE TABLE IF NOT EXISTS `myboxes`.`boxes` (" +
