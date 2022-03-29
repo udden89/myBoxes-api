@@ -12,7 +12,6 @@ public class BoxService {
     static BoxRepository boxRepository = new BoxRepository();
 
     public BoxService() {
-
     }
 
     public void createNewBox(BoxModel box) {
@@ -32,7 +31,7 @@ public class BoxService {
             case "CHINA" -> ShippingCountriesAndPrice.CHINA.price * box.getWeight();
             case "BRAZIL" -> ShippingCountriesAndPrice.BRAZIL.price * box.getWeight();
             case "AUSTRALIA" -> ShippingCountriesAndPrice.AUSTRALIA.price * box.getWeight();
-            default -> 0;
+            default -> -1;
         };
     }
 }

@@ -12,6 +12,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Application {
 
+    //TODO PUT THIS INTO OWN CLASS??
     public static Connection connection = null;
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {

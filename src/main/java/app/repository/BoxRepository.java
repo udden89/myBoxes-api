@@ -30,7 +30,7 @@ public class BoxRepository {
                 "('" + box.getReceiver() +
                 "', " + box.getWeight() +
                 ", '" + box.getColor() +
-                "', '" + box.getDestinationCountry() +
+                "', '" + box.getDestinationCountry().toUpperCase() +
                 "', '" + box.getShippingCost() + "')";
         System.out.println(sql);
         executePreparedStatement(sql);
@@ -53,6 +53,7 @@ public class BoxRepository {
                 boxModel.setShippingCost(rs.getDouble("shipping_cost"));
             boxModels.add(boxModel);
         }
+        statement.close();
         return boxModels;
     }
 
