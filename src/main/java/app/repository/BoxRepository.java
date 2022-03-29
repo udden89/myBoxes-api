@@ -16,20 +16,22 @@ public class BoxRepository {
         String sql = "CREATE TABLE IF NOT EXISTS `myboxes`.`boxes` (" +
                 "  `id` INT NOT NULL AUTO_INCREMENT," +
                 "  `receiver` VARCHAR(45) NOT NULL," +
-                "  `weight` DECIMAL NOT NULL," +
-                "  `color` VARCHAR(45) NOT NULL," +
-                "  `destinationCountry` VARCHAR(45) NOT NULL," +
+                "  `weight` DOUBLE NOT NULL," +
+                "  `color` VARCHAR(45) NULL," +
+                "  `destination_country` VARCHAR(45) NOT NULL," +
+                "  `shipping_cost` DOUBLE NULL," +
                 "  PRIMARY KEY (`id`));";
         executeStatement(sql);
     }
 
     public void saveBox(BoxModel box){
         String sql = "INSERT INTO " +
-                "boxes(receiver, weight, color, destinationCountry) VALUES" +
+                "boxes(receiver, weight, color, destination_country, shipping_cost) VALUES" +
                 "('" + box.getReceiver() +
                 "', " + box.getWeight() +
                 ", '" + box.getColor() +
-                "', '" + box.getDestinationCountry() + "')";
+                "', '" + box.getDestinationCountry() +
+                "', '" + box.getShippingCost() + "')";
         System.out.println(sql);
         executePreparedStatement(sql);
     }
@@ -37,17 +39,18 @@ public class BoxRepository {
     public ArrayList<BoxModel> getAllBoxes() throws SQLException {
         String sql = "SELECT * FROM boxes ";
 
+        ArrayList<BoxModel> boxModels = new ArrayList<BoxModel>();
+
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
 
-        ArrayList<BoxModel> boxModels = new ArrayList<BoxModel>();
-
         while (rs.next()){
             BoxModel boxModel = new BoxModel();
-            boxModel.setReceiver(rs.getString("receiver"));
-            boxModel.setWeight(rs.getDouble("weight"));
-            boxModel.setColor(rs.getString("color"));
-            boxModel.setDestinationCountry(rs.getString("destinationCountry"));
+                boxModel.setReceiver(rs.getString("receiver"));
+                boxModel.setWeight(rs.getDouble("weight"));
+                boxModel.setColor(rs.getString("color"));
+                boxModel.setDestinationCountry(rs.getString("destination_country"));
+                boxModel.setShippingCost(rs.getDouble("shipping_cost"));
             boxModels.add(boxModel);
         }
         return boxModels;

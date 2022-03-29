@@ -6,7 +6,15 @@ public class BoxModel {
     double weight = 0;
     String color = "";
     String destinationCountry = "";
+    double shippingCost = 0;
 
+    public double getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(double shippingCost) {
+        this.shippingCost = shippingCost;
+    }
 
     public String getReceiver() {
         return receiver;
@@ -47,6 +55,7 @@ public class BoxModel {
                 ", weight=" + weight +
                 ", color='" + color + '\'' +
                 ", destinationCountry='" + destinationCountry + '\'' +
+                ", shippingCost=" + shippingCost +
                 '}';
     }
 }

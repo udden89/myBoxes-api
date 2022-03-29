@@ -17,6 +17,7 @@ public class BoxController {
 
     public static Handler createNewBox = ctx -> {
         boxService.createNewBox(ctx.bodyAsClass(BoxModel.class));
+        ctx.json("Ok");
     };
 
 }
