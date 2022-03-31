@@ -4,7 +4,8 @@ import app.models.BoxModel;
 import java.sql.*;
 import java.util.ArrayList;
 
-import static app.Application.connection;
+
+import static app.db.MySQLConnector.getConnection;
 
 public class BoxRepository {
 
@@ -24,16 +25,26 @@ public class BoxRepository {
         executeStatement(sql);
     }
 
-    public void saveBox(BoxModel box){
-        String sql = "INSERT INTO " +
-                "boxes(receiver, weight, color, destination_country, shipping_cost) VALUES" +
-                "('" + box.getReceiver() +
-                "', " + box.getWeight() +
-                ", '" + box.getColor() +
-                "', '" + box.getDestinationCountry().toUpperCase() +
-                "', '" + box.getShippingCost() + "')";
-        System.out.println(sql);
-        executePreparedStatement(sql);
+    public boolean saveBox(BoxModel box){
+
+        String sql = "INSERT INTO boxes(receiver, weight, color, destination_country, shipping_cost) VALUES(?,?,?,?,?)";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+
+            preparedStatement.setString(1, box.getReceiver());
+            preparedStatement.setDouble(2, box.getWeight());
+            preparedStatement.setString(3, box.getColor());
+            preparedStatement.setString(4, box.getDestinationCountry());
+            preparedStatement.setDouble(5,box.getShippingCost());
+
+            int a = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            if (a == 1) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public ArrayList<BoxModel> getAllBoxes() throws SQLException {
@@ -41,7 +52,7 @@ public class BoxRepository {
 
         ArrayList<BoxModel> boxModels = new ArrayList<BoxModel>();
 
-        Statement statement = connection.createStatement();
+        Statement statement = getConnection().createStatement();
         ResultSet rs = statement.executeQuery(sql);
 
         while (rs.next()){
@@ -59,17 +70,7 @@ public class BoxRepository {
 
     private void executeStatement(String sqlStatement){
         try {
-            Statement st = connection.createStatement();
-            st.executeUpdate(sqlStatement);
-            st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void executePreparedStatement(String sqlStatement){
-        try {
-            PreparedStatement st = connection.prepareStatement(sqlStatement);
+            Statement st = getConnection().createStatement();
             st.executeUpdate(sqlStatement);
             st.close();
         } catch (SQLException e) {

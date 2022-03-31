@@ -12,12 +12,16 @@ public class BoxController {
     }
 
     public static Handler getAllBoxes = ctx -> {
-        ctx.json(boxService.getAllBoxes());
+        ctx.status(200).json(boxService.getAllBoxes());
     };
 
     public static Handler createNewBox = ctx -> {
-        boxService.createNewBox(ctx.bodyAsClass(BoxModel.class));
-        ctx.json("Ok");
+        boolean ok = boxService.createNewBox(ctx.bodyAsClass(BoxModel.class));
+        if(ok) {
+            ctx.status(200).json("Saved successfully!");
+        }else {
+            ctx.status(500).json("Could not save");
+        }
     };
 
 }

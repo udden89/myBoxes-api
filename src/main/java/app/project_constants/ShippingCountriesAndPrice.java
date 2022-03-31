@@ -13,4 +13,5 @@ public enum ShippingCountriesAndPrice {
     ShippingCountriesAndPrice(double price) {
         this.price = price;
     }
+
 }

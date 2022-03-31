@@ -14,17 +14,16 @@ public class BoxService {
     public BoxService() {
     }
 
-    public void createNewBox(BoxModel box) {
-        System.out.println(box.toString());
-        box.setShippingCost(calcShippingPrice(box));
-        boxRepository.saveBox(box);
+    public boolean createNewBox(BoxModel box) {
+        box.setShippingCost( calculateShippingPrice(box) );
+        return boxRepository.saveBox(box);
     }
 
     public ArrayList<BoxModel> getAllBoxes() throws SQLException {
         return boxRepository.getAllBoxes();
     }
 
-    private double calcShippingPrice(BoxModel box) {
+    private double calculateShippingPrice(BoxModel box) {
 
         return switch (box.getDestinationCountry().toUpperCase()) {
             case "SWEDEN" -> ShippingCountriesAndPrice.SWEDEN.price * box.getWeight();
