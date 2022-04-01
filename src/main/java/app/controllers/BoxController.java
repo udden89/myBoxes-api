@@ -18,9 +18,9 @@ public class BoxController {
     public static Handler createNewBox = ctx -> {
         boolean ok = boxService.createNewBox(ctx.bodyAsClass(BoxModel.class));
         if(ok) {
-            ctx.status(200).json("Saved successfully!");
+            ctx.status(200).json("Box saved successfully!");
         }else {
-            ctx.status(500).json("Could not save");
+            ctx.status(500).json("Could not create the box");
         }
     };
 

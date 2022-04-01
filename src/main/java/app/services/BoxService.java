@@ -16,6 +16,7 @@ public class BoxService {
 
     public boolean createNewBox(BoxModel box) {
         box.setShippingCost( calculateShippingPrice(box) );
+        if(box.getShippingCost() < 0) return false;
         return boxRepository.saveBox(box);
     }
 

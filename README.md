@@ -1,5 +1,8 @@
 # myBoxes-api
  
-Requires a MYSQL database with a database named "myboxes". 
+##
+Requires a MYSQL database. 
 
-Add a .env file, see .env.copyme file
+##
+Add a .env file in the root folder of the project, 
+see the .env.copyme file for the field requirements
