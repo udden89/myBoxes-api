@@ -32,11 +32,11 @@ public class BoxRepository {
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
 
-            preparedStatement.setString(1, box.getReceiver());
-            preparedStatement.setDouble(2, box.getWeight());
-            preparedStatement.setString(3, box.getColor());
-            preparedStatement.setString(4, box.getDestinationCountry());
-            preparedStatement.setDouble(5,box.getShippingCost());
+                preparedStatement.setString(1, box.getReceiver());
+                preparedStatement.setDouble(2, box.getWeight());
+                preparedStatement.setString(3, box.getColor());
+                preparedStatement.setString(4, box.getDestinationCountry());
+                preparedStatement.setDouble(5,box.getShippingCost());
 
             int a = preparedStatement.executeUpdate();
             preparedStatement.close();
