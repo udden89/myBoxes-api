@@ -1,4 +1,7 @@
 # myBoxes-api
+
+##
+This is a work test for a company. 
  
 ##
 Requires a MYSQL database. 
