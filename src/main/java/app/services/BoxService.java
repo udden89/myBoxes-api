@@ -1,6 +1,6 @@
 package app.services;
 
-import app.models.BoxModel;
+import app.models.Box;
 import app.project_constants.ShippingCountriesAndPrice;
 import app.repository.BoxRepository;
 
@@ -14,17 +14,17 @@ public class BoxService {
     public BoxService() {
     }
 
-    public boolean createNewBox(BoxModel box) {
+    public boolean createNewBox(Box box) {
         box.setShippingCost( calculateShippingPrice(box) );
         if(box.getShippingCost() < 0) return false;
         return boxRepository.saveBox(box);
     }
 
-    public ArrayList<BoxModel> getAllBoxes() throws SQLException {
+    public ArrayList<Box> getAllBoxes() throws SQLException {
         return boxRepository.getAllBoxes();
     }
 
-    private double calculateShippingPrice(BoxModel box) {
+    private double calculateShippingPrice(Box box) {
 
         return switch (box.getDestinationCountry().toUpperCase()) {
             case "SWEDEN" -> ShippingCountriesAndPrice.SWEDEN.price * box.getWeight();

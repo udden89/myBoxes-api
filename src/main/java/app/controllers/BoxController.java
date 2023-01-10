@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.models.BoxModel;
+import app.models.Box;
 import app.services.BoxService;
 import io.javalin.http.Handler;
 
@@ -16,7 +16,7 @@ public class BoxController {
     };
 
     public static Handler createNewBox = ctx -> {
-        boolean ok = boxService.createNewBox(ctx.bodyAsClass(BoxModel.class));
+        boolean ok = boxService.createNewBox(ctx.bodyAsClass(Box.class));
         if(ok) {
             ctx.status(200).json("Box saved successfully!");
         }else {

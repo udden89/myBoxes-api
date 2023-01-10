@@ -35,6 +35,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.13.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
         <!--https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
